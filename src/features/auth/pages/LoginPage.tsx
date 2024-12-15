@@ -1,7 +1,19 @@
 import { Box, Button, Container, Paper, Typography } from '@mui/material';
+import { useAppDispatch } from 'app/hooks';
 import * as React from 'react';
+import { authActions } from '../authSlice';
 
 export function LoginPage() {
+  const dispatch = useAppDispatch();
+  const handleLoginClick = () => {
+    // TODO: Get username + pwd from login form
+    dispatch(
+      authActions.login({
+        username: '',
+        password: '',
+      }),
+    );
+  };
   return (
     <Container
       sx={{
@@ -17,7 +29,7 @@ export function LoginPage() {
           Student Management
         </Typography>
         <Box sx={{ mt: 4 }}>
-          <Button fullWidth variant="contained" color="primary">
+          <Button fullWidth variant="contained" color="primary" onClick={handleLoginClick}>
             Fake Login
           </Button>
         </Box>
