@@ -1,6 +1,7 @@
 import { call, delay, fork, put, take } from 'redux-saga/effects';
 import { authActions, LoginPayload } from './authSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { push } from 'connected-react-router';
 
 function* handleLogin(payload: LoginPayload) {
   try {
@@ -13,10 +14,12 @@ function* handleLogin(payload: LoginPayload) {
         name: 'miles',
       }),
     );
+
+    // redirect to Admin page
+    yield put(push('/admin'));
   } catch (error) {
     yield put(authActions.loginFailed('error'));
   }
-  // redirect to Admin page
 }
 
 function* handleLogout() {

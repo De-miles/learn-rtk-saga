@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import cityApi from 'api/cityApi';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { LoginPage } from 'features/auth/pages/LoginPage';
 import { AdminLayout } from 'components/Layout';
 import { NotFound, PrivateRoute } from 'components/Common';
@@ -21,20 +21,21 @@ function App() {
       <Button variant="contained" color="primary" onClick={() => dispatch(authActions.logout())}>
         Logout
       </Button>
-      <Routes>
-        <Route path="/login" element={<LoginPage />}></Route>
+      <Switch>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
 
-        <Route
-          path="/admin"
-          element={
-            <PrivateRoute>
-              <AdminLayout />
-            </PrivateRoute>
-          }
-        ></Route>
+        <Route path="/admin">
+          <PrivateRoute>
+            <AdminLayout />
+          </PrivateRoute>
+        </Route>
 
-        <Route path="" element={<NotFound />}></Route>
-      </Routes>
+        <Route path="">
+          <NotFound />
+        </Route>
+      </Switch>
     </div>
   );
 }
